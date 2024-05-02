@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Ingeniero Cristian Díaz</title>
+  <title>Ing. Cristian Díaz</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -37,7 +37,6 @@
 </head>
 
 <body>
-
   <!-- ======= Mobile nav toggle button ======= -->
   <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
 
@@ -794,4 +793,37 @@
   
   // Actualizar el contenido del span que muestra la edad
   document.getElementById('age').textContent = edad;
-</script>
+
+  var originalTitle = document.title; // Guarda el título original de la página
+var newTitle = '¿Should we start a project?'; // Nuevo título cuando la ventana no tiene el foco
+var scrollInterval; // Variable para almacenar el intervalo de desplazamiento
+
+window.onblur = function() {
+  document.title = newTitle; // Cambia el título cuando la ventana pierde el foco
+  var titleLength = newTitle.length;
+  var windowWidth = window.innerWidth;
+  var scrollAmount = 0;
+  var scrollingTitle = newTitle;
+
+  // Agrega espacios al final del título para simular el desplazamiento
+  for (var i = 0; i < windowWidth; i++) {
+    scrollingTitle += ' ';
+  }
+
+  // Desplaza el título de izquierda a derecha
+  function scrollTitle() {
+    document.title = scrollingTitle.substring(scrollAmount, scrollAmount + windowWidth);
+    scrollAmount++;
+    if (scrollAmount > titleLength) {
+      scrollAmount = 0;
+    }
+  }
+  
+  scrollInterval = setInterval(scrollTitle, 50); // Velocidad de desplazamiento más rápida
+};
+
+window.onfocus = function() {
+  clearInterval(scrollInterval); // Detiene el desplazamiento cuando la ventana obtiene el foco
+  document.title = originalTitle; // Restaura el título original
+};  
+  </script>
